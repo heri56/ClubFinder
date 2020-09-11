@@ -1,21 +1,18 @@
-const main = function () {
+const main = () => {
     const searchElement = document.querySelector("#searchElement");
     const buttonSearchElement = document.querySelector("#searchButtonElement");
     const clubListElement = document.querySelector("#clubList");
 
-    const onButtonSearchClicked = function () {
+    const onButtonSearchClicked = () => {
         const dataSource = new DataSource(renderResult, fallbackResult);
         dataSource.searchClub(searchElement.value);
     };
 
-    const renderResult = function (results) {
+    const renderResult = results => {
         clubListElement.innerHTML = "";
-        results.forEach(function (club) {
-            var name = club.name;
-            var fanArt = club.fanArt;
-            var description = club.description;
-
-            var clubElement = document.createElement("div");
+        results.forEach(club => {
+            const {name, fanArt, description} = club;
+            const clubElement = document.createElement("div")
             clubElement.setAttribute("class", "club");
 
             clubElement.innerHTML = `
@@ -28,10 +25,10 @@ const main = function () {
         })
     };
 
-    const fallbackResult = function (message) {
+    const fallbackResult = message => {
         clubListElement.innerHTML = "";
         clubListElement.innerHTML += `<h2 class="placeholder">${message}</h2>`;
     };
 
     buttonSearchElement.addEventListener("click", onButtonSearchClicked);
-};fallbackResult
+};
